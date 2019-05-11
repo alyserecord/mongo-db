@@ -59,20 +59,39 @@ text file. Paste and run the queries in the Mongo shell.
    Mongo also has tab complete, so you can tab complete some of your commands 
    for convenience.  
 
+myans:
+db.log.count()
+
 4. Print out all of the clicks you have stored using `.find()`. Now using 
    `.limit()`, return 10 entries. You can also use `.findOne()` to quickly 
    view the first row and examine the available columns.  
 
+myans:
+db.log.find().limit(10)
+
 5. Use `.find()` to find all the clicks where `cy` (city) is `San Francisco`. 
    How many are there?
+
+myans:
+db.log.find({cy:'San Francisco'})
+db.log.find({cy:'San Francisco'})
+11
+
 
 6. Use `.distinct()` to find all the distinct types of web browsers (under the 
    field `a`) people use to visit the sites. Count the the number of distinct web 
    browsers (use `.length` on your distinct list). 
 
+myans:
+db.log.distinct('a')
+db.log.distinct('a').length
+
 7. Select and count the records where the users have visited a website either 
    from a `Mozilla` or an `Opera` web browser. Search the `a` field using 
    [regex in mongo][mongo-like-query]. 
+
+myans:
+db.log.find({'a': /.*Mozilla|Opera*/}).count()
 
 8. Find the type of the `t` (timestamp) field. You can access the type of a 
    field in an entry by using `typeof db.log.findOne({'t': {$exists: true}}).t`. 
@@ -91,7 +110,7 @@ text file. Paste and run the queries in the Mongo shell.
       //  Date() object
    })
    ```
-   
+   e
 9. Sort the clicks by the timestamp and find when the first click occurred. 
    How many clicks occurred in the first hour? To answer this, assign the 
    earliest timestamp and timestamp at the one-hour bound to separate variables
